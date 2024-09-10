@@ -1,5 +1,10 @@
 # iit_hackathon_new
 
+
+s1-- download the llama index the bloke from hugging face and keep it locally
+save the pdfs in a data folder in workspace folder and run ingest.py first and then the version of code needed
+
+
 ingest is to convert our pdf to vector store 
 model is the base model in chainlit 
 main is the customized model for our use case in chainlit env
