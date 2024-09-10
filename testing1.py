@@ -29,7 +29,7 @@ Helpful answer:
 """
 
 # Google GenAI Configuration
-genai.configure(api_key="AIzaSyCy4ZTxt1DiSBeySNHw-pYJey70Nc_uQ3I")
+genai.configure(api_key="api---key---brother")
 
 # Function to initialize GenAI model
 def initialize_model():
