@@ -1,0 +1,41 @@
+The error "Data persistence is not enabled" typically means that the environment where you're running the code does not have persistent storage or database capabilities enabled. This can occur if you're trying to use features like saving to a vector store (e.g., FAISS) or accessing a file system that expects data to be persisted across different runs.
+
+To resolve this, you can try the following approaches:
+
+1. Check FAISS Persistence Settings
+If you're using FAISS with the expectation that it should store data persistently (e.g., FAISS.load_local()), ensure that the DB_FAISS_PATH exists and that your environment has write access to the folder.
+
+You can create the path manually if it doesn't exist:
+
+python
+Copy code
+import os
+
+DB_FAISS_PATH = 'vectorstore/db_faiss'
+
+# Ensure the path exists
+if not os.path.exists(DB_FAISS_PATH):
+    os.makedirs(DB_FAISS_PATH)
+This will ensure that the directory for FAISS storage exists, preventing any errors related to data persistence.
+
+2. Check Vectorstore/Database Configuration
+If you're using a vector store like FAISS or any other database, ensure that your environment supports data storage. In some cloud environments (such as serverless functions), persistent storage might not be available. If so, you may need to use an external service, such as:
+
+Cloud storage: Consider using a cloud-based storage solution, such as AWS S3, to store your files.
+Database: You could store the vectors in a cloud-based database, like PostgreSQL, MongoDB, or another vector database (e.g., Pinecone).
+3. Temporary Data Loading (Non-persistent)
+If you're running in an environment where data persistence is not possible or needed (such as testing or development), you might modify the FAISS loading/saving behavior by using in-memory data rather than saving it to disk. For instance, you can avoid using FAISS.load_local() and work with in-memory objects instead.
+
+Example for FAISS in Memory:
+If you're loading vectors and don't necessarily need persistence for your current use case, you can directly initialize FAISS in memory without a local path:
+
+python
+Copy code
+from langchain_community.vectorstores import FAISS
+
+# Example for in-memory FAISS index creation (without persistence)
+def create_faiss_in_memory(embeddings):
+    db = FAISS.from_texts(["sample text"], embeddings)  # Replace with your embeddings
+    return db
+4. Check Chainlit Settings
+If you are running your code within a Chainlit app, make sure that Chainlit has persistent data enabled or supported. This might depend on your hosting setup or how the app is deployed.
