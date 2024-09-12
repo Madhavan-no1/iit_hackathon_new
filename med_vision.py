@@ -7,7 +7,7 @@ from PIL import Image
 import fitz  # PyMuPDF to convert PDFs to images
 
 # Configure GenAI API key
-genai.configure(api_key="AIzaSyCy4ZTxt1DiSBeySNHw-pYJey70Nc_uQ3I")
+genai.configure(api_key="API-KEYY_HEERE")
 
 # Function to initialize the model
 def initialize_model():
